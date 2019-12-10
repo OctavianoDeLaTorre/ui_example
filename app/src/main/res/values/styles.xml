@@ -19,13 +19,13 @@
         <item name="android:textColor">#fff</item>
         <item name="android:textSize">36dp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily" tools:targetApi="jelly_bean">sans-serif-light</item>
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">serif</item>
     </style>
 
     <style name="SubTitulo" parent="@android:style/TextAppearance.Medium">
         <item name="android:textColor">#fff</item>
         <item name="android:textSize">32dp</item>
-        <item name="android:fontFamily" tools:targetApi="jelly_bean">sans-serif-light</item>
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">serif</item>
     </style>
 
     <style name="cajas">
@@ -92,8 +92,16 @@
         <item name="colorPrimary">#fff</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="strokeColor">#fff</item>
-
     </style>
 
 
+    <style name="Botones.menu" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:backgroundTint" tools:targetApi="lollipop">#FFFFFF</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">25dip</item>
+        <item name="android:drawableTint" tools:targetApi="m">@color/colorPrimary</item>
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">150dp</item>
+    </style>
 </resources>

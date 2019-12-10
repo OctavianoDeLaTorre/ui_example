@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="botonesMenu" parent="Botones">
+        <item name="android:gravity">center</item>
+        <item name="android:padding">25dip</item>
+        <item name="android:drawableTint">@color/colorPrimary</item>
+    </style>
+</resources>

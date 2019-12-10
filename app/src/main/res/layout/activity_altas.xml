@@ -45,6 +45,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView2">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtAltasNC"
                     style="@style/cajas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -67,6 +68,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtAltasN"
                     style="@style/cajas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -88,10 +90,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtAltasPA"
                     style="@style/cajas"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                   />
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -110,10 +112,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtAltasSA"
                     style="@style/cajas"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                   />
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -133,7 +135,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
 
                 <AutoCompleteTextView
-                    android:id="@+id/filled_exposed_dropdown"
+                    android:id="@+id/txtAltasE"
                     style="@style/cajas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -157,6 +159,7 @@
 
                 <AutoCompleteTextView
 
+                    android:id="@+id/txtAltasS"
                     style="@style/cajas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -179,13 +182,14 @@
 
                 <AutoCompleteTextView
 
+                    android:id="@+id/txtAltasC"
                     style="@style/cajas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/material_text_button"
+                android:id="@+id/btnLimpiar"
                 style="@style/lineButton"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
@@ -199,7 +203,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout8" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/material_unelevated_button"
+                android:id="@+id/btnAgregar"
                 style="@style/Botones"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
