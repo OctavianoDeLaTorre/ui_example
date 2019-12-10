@@ -55,6 +55,13 @@ public class MenuAlumno extends AppCompatActivity {
                 abrirActivity(AltasActivity.class);
             }
         });
+
+        btnCambios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirActivity(CambiosActivity.class);
+            }
+        });
     }
 
     private void abrirActivity(Class<?> cls){

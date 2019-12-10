@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/title_activity_altas"
     android:background="@drawable/bg"
-    tools:context=".AltasActivity" >
+    tools:context=".CambiosActivity" >
 
     <ScrollView
         android:layout_width="0dp"
@@ -31,18 +31,18 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout"
                 style="@style/TextInputLayoutAppearance"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
-                android:hint="Num. control"
 
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:hint="Buscar por Num. control"
+                app:layout_constraintEnd_toStartOf="@+id/btnCBuscar"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtCNC"
@@ -55,7 +55,6 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout3"
                 style="@style/TextInputLayoutAppearance"
-                android:hint="Nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -63,9 +62,10 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
+                android:hint="Nombre"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+                app:layout_constraintTop_toBottomOf="@+id/textView6">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtCN"
@@ -195,10 +195,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginTop="32dp"
-                android:text="Limpiar"
+                android:layout_marginTop="16dp"
                 android:drawableLeft="@android:drawable/ic_menu_close_clear_cancel"
                 android:drawableTint="#fff"
+                android:text="Limpiar"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout8" />
 
@@ -207,14 +207,42 @@
                 style="@style/Botones"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
-                android:text="Guardar"
                 android:drawableLeft="@android:drawable/ic_menu_save"
                 android:drawableTint="@color/colorPrimary"
+                android:text="Guardar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout8" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCBuscar"
+                style="@style/Botones"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:text="Buscar"
+                app:icon="@android:drawable/ic_menu_search"
+                app:iconTint="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Datos del alumno"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:fontFamily="serif"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

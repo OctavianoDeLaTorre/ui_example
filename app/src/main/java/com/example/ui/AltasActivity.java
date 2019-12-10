@@ -13,8 +13,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -31,7 +29,7 @@ public class AltasActivity extends AppCompatActivity {
 
    private TextInputEditText txtNc, txtn,txtpa,txtsa;
    private AutoCompleteTextView txte,txts,txtc;
-   private Button btnAgregar;
+   private Button btnAgregar, btnLimpiar;
    private String url_servidor = "http://10.0.2.2/PruebasPHP/Sistema_ABCC_MSQL/";
 
     @Override
@@ -45,20 +43,29 @@ public class AltasActivity extends AppCompatActivity {
 
     private void configView(){
 
-        txtNc = findViewById(R.id.txtAltasNC);
-        txtn = findViewById(R.id.txtAltasN);
-        txtsa = findViewById(R.id.txtAltasSA);
-        txtpa = findViewById(R.id.txtAltasPA);
-        txtc = findViewById(R.id.txtAltasC);
-        txte = findViewById(R.id.txtAltasE);
-        txts = findViewById(R.id.txtAltasS);
+        txtNc = findViewById(R.id.txtCNC);
+        txtn = findViewById(R.id.txtCN);
+        txtsa = findViewById(R.id.txtCSa);
+        txtpa = findViewById(R.id.txtCPa);
+        txtc = findViewById(R.id.txtCC);
+        txte = findViewById(R.id.txtCE);
+        txts = findViewById(R.id.txtCS);
 
-        btnAgregar = findViewById(R.id.btnAgregar);
+        btnAgregar = findViewById(R.id.btnCGuardar);
+        btnLimpiar = findViewById(R.id.btnLimpiar);
+
 
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 agregarAlumno();
+            }
+        });
+
+        btnLimpiar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                limpiarCajas();
             }
         });
 
@@ -164,26 +171,38 @@ public class AltasActivity extends AppCompatActivity {
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
 
-            if (integer == 1)
-                Snackbar.make(btnAgregar, "No se pudo autenticar usuario...", Snackbar.LENGTH_SHORT)
+            if (integer == 1){
+                Snackbar.make(btnAgregar, "Alumno agregado con exito!", Snackbar.LENGTH_LONG)
                         .setAction("Ok", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-
                             }
                         })
                         .show();
-            else
-                Snackbar.make(btnAgregar, "No se pudo autenticar usuario...", Snackbar.LENGTH_SHORT)
+                limpiarCajas();
+            } else{
+                Snackbar.make(btnAgregar, "No fue posible agregar el alumno!", Snackbar.LENGTH_LONG)
                         .setAction("Ok", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-
                             }
                         })
                         .show();
+            }
+
 
         }
+    }
+
+
+    private void limpiarCajas(){
+        txtNc.setText("");
+        txtn .setText("");
+        txtsa .setText("");
+        txtpa .setText("");
+        txtc .setText("");
+        txte.setText("");
+        txts.setText("");
     }
 
 }
