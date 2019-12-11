@@ -11,7 +11,7 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/colorPrimaryAlpha"
+        android:background="@color/blancoAlphc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -45,7 +45,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtCNC"
+                    android:id="@+id/txtBNumControl"
                     style="@style/cajas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -112,7 +112,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtCSa"
+                    android:id="@+id/txtConsultas"
                     style="@style/cajas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -129,7 +129,7 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:hint="Edad"
-                android:textColorHint="#fff"
+                android:textColorHint="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
@@ -189,7 +189,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnLimpiar"
+                android:id="@+id/btnEliminar"
                 style="@style/lineButton"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
@@ -197,13 +197,13 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="16dp"
                 android:drawableLeft="@android:drawable/ic_menu_close_clear_cancel"
-                android:drawableTint="#fff"
+                android:drawableTint="@color/colorPrimary"
                 android:text="Limpiar"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout8" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnCGuardar"
+                android:id="@+id/btnBuscar"
                 style="@style/Botones"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
@@ -211,8 +211,9 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:drawableLeft="@android:drawable/ic_menu_save"
-                android:drawableTint="@color/colorPrimary"
+                android:drawableTint="@color/colorAccent"
                 android:text="Guardar"
+                android:textColor="@color/colorAccent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout8" />
 
@@ -225,8 +226,9 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginRight="32dp"
                 android:text="Buscar"
+                android:textColor="@color/colorAccent"
                 app:icon="@android:drawable/ic_menu_search"
-                app:iconTint="@color/colorPrimary"
+                app:iconTint="@color/colorAccent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -236,7 +238,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Datos del alumno"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:fontFamily="serif"

@@ -12,8 +12,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -34,7 +32,7 @@ public class CambiosActivity extends AppCompatActivity {
     private TextInputEditText txtCNc, txtCn,txtCpa,txtCsa;
     private AutoCompleteTextView txtCe,txtCs,txtCc;
     private Button btnCBuscar, btnCGuardar, btnLimpiar;
-    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+    InputMethodManager imm ;
     private AnalizadorJSON json = new AnalizadorJSON();
     private String url_servidor = "http://10.0.2.2/PruebasPHP/Sistema_ABCC_MSQL/";
 
@@ -47,16 +45,18 @@ public class CambiosActivity extends AppCompatActivity {
     }
 
     private void configView() {
-        txtCNc = findViewById(R.id.txtCNC);
+        txtCNc = findViewById(R.id.txtBNumControl);
         txtCn = findViewById(R.id.txtCN);
-        txtCsa = findViewById(R.id.txtCSa);
+        txtCsa = findViewById(R.id.txtConsultas);
         txtCpa = findViewById(R.id.txtCPa);
         txtCc = findViewById(R.id.txtCC);
         txtCe = findViewById(R.id.txtCE);
         txtCs = findViewById(R.id.txtCS);
         btnCBuscar = findViewById(R.id.btnCBuscar);
-        btnCGuardar = findViewById(R.id.btnCGuardar);
-        btnLimpiar = findViewById(R.id.btnLimpiar);
+        btnCGuardar = findViewById(R.id.btnBuscar);
+        btnLimpiar = findViewById(R.id.btnEliminar);
+
+        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
 
         String[] edades = new String[120];

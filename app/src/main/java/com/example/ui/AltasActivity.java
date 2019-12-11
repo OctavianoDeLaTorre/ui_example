@@ -43,16 +43,16 @@ public class AltasActivity extends AppCompatActivity {
 
     private void configView(){
 
-        txtNc = findViewById(R.id.txtCNC);
+        txtNc = findViewById(R.id.txtBNumControl);
         txtn = findViewById(R.id.txtCN);
-        txtsa = findViewById(R.id.txtCSa);
+        txtsa = findViewById(R.id.txtConsultas);
         txtpa = findViewById(R.id.txtCPa);
         txtc = findViewById(R.id.txtCC);
         txte = findViewById(R.id.txtCE);
         txts = findViewById(R.id.txtCS);
 
-        btnAgregar = findViewById(R.id.btnCGuardar);
-        btnLimpiar = findViewById(R.id.btnLimpiar);
+        btnAgregar = findViewById(R.id.btnBuscar);
+        btnLimpiar = findViewById(R.id.btnEliminar);
 
 
         btnAgregar.setOnClickListener(new View.OnClickListener() {

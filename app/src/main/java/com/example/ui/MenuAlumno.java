@@ -62,6 +62,20 @@ public class MenuAlumno extends AppCompatActivity {
                 abrirActivity(CambiosActivity.class);
             }
         });
+
+        btnBajas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirActivity(BajasActivity.class);
+            }
+        });
+
+        btnConsultas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirActivity(ConsultasActivity.class);
+            }
+        });
     }
 
     private void abrirActivity(Class<?> cls){
