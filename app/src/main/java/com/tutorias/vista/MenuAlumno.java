@@ -1,18 +1,20 @@
-package com.example.ui;
+package com.tutorias.vista;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
+import com.tutorias.vista.R;
+
 public class MenuAlumno extends AppCompatActivity {
 
     private Button btnAltas;
+    private Button btnTutor;
     private Button btnBajas;
     private Button btnCambios;
     private Button btnConsultas;
@@ -41,6 +43,7 @@ public class MenuAlumno extends AppCompatActivity {
         btnBajas =  findViewById(R.id.btnBajas);
         btnCambios =  findViewById(R.id.btnCambios);
         btnConsultas =  findViewById(R.id.btnConsultas);
+        btnTutor = findViewById(R.id.btnTutor);
 
 
 
@@ -74,6 +77,13 @@ public class MenuAlumno extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 abrirActivity(ConsultasActivity.class);
+            }
+        });
+
+        btnTutor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abrirActivity(TutoresActivity.class);
             }
         });
     }

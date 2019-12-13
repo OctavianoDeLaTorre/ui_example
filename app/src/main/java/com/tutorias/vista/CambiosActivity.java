@@ -1,4 +1,4 @@
-package com.example.ui;
+package com.tutorias.vista;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
+import com.tutorias.vista.R;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -32,9 +33,9 @@ public class CambiosActivity extends AppCompatActivity {
     private TextInputEditText txtCNc, txtCn,txtCpa,txtCsa;
     private AutoCompleteTextView txtCe,txtCs,txtCc;
     private Button btnCBuscar, btnCGuardar, btnLimpiar;
-    InputMethodManager imm ;
+    private InputMethodManager imm ;
     private AnalizadorJSON json = new AnalizadorJSON();
-    private String url_servidor = "http://10.0.2.2/PruebasPHP/Sistema_ABCC_MSQL/";
+    private String url_servidor = "http://176.48.16.22/PruebasPHP/Sistema_ABCC_MSQL/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,33 +104,18 @@ public class CambiosActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String numControl = txtCNc.getText().toString();
-
-                try {
-                    ArrayList<String> lista = new BuscarAlumno().execute("num_control",numControl).get();
-                    if (lista != null){
-                        txtCn.setText(lista.get(1));
-                        txtCpa.setText(lista.get(2));
-                        txtCsa.setText(lista.get(3));
-                        txtCc.setText(lista.get(4));
-                        txtCs.setText(lista.get(5));
-                        txtCe.setText(lista.get(6));
-                        txtCNc.requestFocus();
-                        imm.hideSoftInputFromWindow(txtCNc.getWindowToken(), 0);
-                    }else{
-                        Snackbar.make(btnCGuardar, "Nose econtro ningun registro!", Snackbar.LENGTH_LONG)
-                                .setAction("Ok", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                    }
-                                })
-                                .show();
-                        limpiarCajas();
-                    }
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if (!numControl.replace(" ","").equals("")){
+                    new BuscarAlumno().execute("numControl",numControl);
+                } else {
+                    Snackbar.make(btnCGuardar, "Debe ingresar el numero de control!!", Snackbar.LENGTH_LONG)
+                            .setAction("Ok", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                }
+                            })
+                            .show();
                 }
+
             }
         });
 
@@ -149,32 +135,22 @@ public class CambiosActivity extends AppCompatActivity {
 
                 //condicio para ver si hay coneccion
                 if (ni != null && ni.isConnected()){
-                    //conectar y enviar datos para guardar en MySQL
-                    try {
-                        boolean resultado = new ActualizarAlumno().execute(nc,n,pa,sa,s,c,e).get();
-                        if (resultado){
-                            limpiarCajas();
-                            Snackbar.make(btnCGuardar, "Registro actualizado con exito!", Snackbar.LENGTH_LONG)
-                                    .setAction("Ok", new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                        }
-                                    })
-                                    .show();
-                        }else{
-                            Snackbar.make(btnCGuardar, "Registro actualizado no se pudo actualizar!", Snackbar.LENGTH_LONG)
-                                    .setAction("Ok", new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                        }
-                                    })
-                                    .show();
-                        }
-                    } catch (ExecutionException e1) {
-                        e1.printStackTrace();
-                    } catch (InterruptedException e1) {
-                        e1.printStackTrace();
+
+                    if (validarCajas(txtCNc,txtCn,txtCpa,txtCsa) && validarCombos(txtCs,txtCe,txtCc)){
+                        //conectar y enviar datos para guardar en MySQL
+
+                           new ActualizarAlumno().execute(nc,n,pa,sa,s,c,e);
+
+                    } else {
+                        Snackbar.make(btnCGuardar, "Falta información!", Snackbar.LENGTH_LONG)
+                                .setAction("Ok", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                    }
+                                })
+                                .show();
                     }
+
                 }
             }
         });
@@ -185,6 +161,28 @@ public class CambiosActivity extends AppCompatActivity {
                 limpiarCajas();
             }
         });
+    }
+
+    private boolean validarCajas(TextInputEditText...cajas){
+        String texto;
+        for (TextInputEditText caja : cajas){
+            texto = caja.getText().toString();
+            texto = texto.replace(" ","");
+            if (texto.equals(""))
+                return false;
+        }
+        return true;
+    }
+
+    private boolean validarCombos(AutoCompleteTextView...cajas){
+        String texto;
+        for (AutoCompleteTextView caja : cajas){
+            texto = caja.getText().toString();
+            texto = texto.replace(" ","");
+            if (texto.equals(""))
+                return false;
+        }
+        return true;
     }
 
     public void limpiarCajas(){
@@ -204,7 +202,6 @@ public class CambiosActivity extends AppCompatActivity {
         @Override
         protected ArrayList<String> doInBackground(String... strings) {
             ArrayList<String> lista = null;
-
 
             String url = url_servidor+"consultas.php";
             JSONObject jsonObject = json.buscarHTTP(url,strings[0],strings[1]);
@@ -228,9 +225,35 @@ public class CambiosActivity extends AppCompatActivity {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+            } catch (NullPointerException e){
+                return null;
             }
 
             return lista;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<String> lista) {
+            super.onPostExecute(lista);
+            if (lista != null){
+                txtCn.setText(lista.get(1));
+                txtCpa.setText(lista.get(2));
+                txtCsa.setText(lista.get(3));
+                txtCc.setText(lista.get(4));
+                txtCs.setText(lista.get(5));
+                txtCe.setText(lista.get(6));
+                txtCNc.requestFocus();
+                imm.hideSoftInputFromWindow(txtCNc.getWindowToken(), 0);
+            }else{
+                Snackbar.make(btnCGuardar, "Nose econtro ningun registro!", Snackbar.LENGTH_LONG)
+                        .setAction("Ok", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                            }
+                        })
+                        .show();
+                limpiarCajas();
+            }
         }
     }
 
@@ -257,7 +280,7 @@ public class CambiosActivity extends AppCompatActivity {
             int r = 0;
             try {
                 r = resultado.getInt("exito");
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -265,6 +288,28 @@ public class CambiosActivity extends AppCompatActivity {
                 return true;
             }
             return false;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean resultado) {
+            if (resultado){
+                limpiarCajas();
+                Snackbar.make(btnCGuardar, "Registro actualizado con exito!", Snackbar.LENGTH_LONG)
+                        .setAction("Ok", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                            }
+                        })
+                        .show();
+            }else{
+                Snackbar.make(btnCGuardar, "Registro actualizado no se pudo actualizar!", Snackbar.LENGTH_LONG)
+                        .setAction("Ok", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                            }
+                        })
+                        .show();
+            }
         }
     }
 }

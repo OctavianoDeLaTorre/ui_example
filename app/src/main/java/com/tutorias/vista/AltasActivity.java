@@ -1,4 +1,4 @@
-package com.example.ui;
+package com.tutorias.vista;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -10,10 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
+import com.tutorias.vista.R;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -30,13 +32,13 @@ public class AltasActivity extends AppCompatActivity {
    private TextInputEditText txtNc, txtn,txtpa,txtsa;
    private AutoCompleteTextView txte,txts,txtc;
    private Button btnAgregar, btnLimpiar;
-   private String url_servidor = "http://10.0.2.2/PruebasPHP/Sistema_ABCC_MSQL/";
+   private InputMethodManager imm ;
+    private String url_servidor = "http://176.48.16.22/PruebasPHP/Sistema_ABCC_MSQL/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_altas);
-
 
         configView();
     }
@@ -53,6 +55,8 @@ public class AltasActivity extends AppCompatActivity {
 
         btnAgregar = findViewById(R.id.btnBuscar);
         btnLimpiar = findViewById(R.id.btnEliminar);
+
+        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
 
         btnAgregar.setOnClickListener(new View.OnClickListener() {
@@ -124,9 +128,50 @@ public class AltasActivity extends AppCompatActivity {
 
         //condicio para ver si hay coneccion
         if (ni != null && ni.isConnected()){
-            //conectar y enviar datos para guardar en MySQL
-            new AgregarAlumno().execute(nc,n,pa,sa,s,c,e);
+            if (validarCajas(txtNc,txtn,txtpa,txtsa) && validarCombos(txts,txtc,txte))
+                //conectar y enviar datos para guardar en MySQL
+                new AgregarAlumno().execute(nc,n,pa,sa,s,c,e);
+            else
+                Snackbar.make(btnAgregar, "Falta infotmacion!!", Snackbar.LENGTH_LONG)
+                        .setAction("Ok", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                            }
+                        })
+                        .show();
+        } else {
+            Snackbar.make(btnAgregar, "Revise su acceso a intenet!!", Snackbar.LENGTH_LONG)
+                    .setAction("Ok", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    })
+                    .show();
         }
+    }
+
+    private boolean validarCajas(TextInputEditText...cajas){
+        String texto;
+        for (TextInputEditText caja : cajas){
+            texto = caja.getText().toString();
+            texto = texto.replace(" ","");
+            if (texto.equals(""))
+                return false;
+        }
+        return true;
+    }
+
+    private boolean validarCombos(AutoCompleteTextView...cajas){
+        String texto;
+        for (AutoCompleteTextView caja : cajas){
+            texto = caja.getText().toString();
+            texto = texto.replace(" ","");
+            if (texto.equals(""))
+                return false;
+        }
+        return true;
     }
 
     //Clase interna
@@ -203,6 +248,8 @@ public class AltasActivity extends AppCompatActivity {
         txtc .setText("");
         txte.setText("");
         txts.setText("");
+        txtNc.requestFocus();
+        imm.hideSoftInputFromWindow(txtNc.getWindowToken(), 0);
     }
 
 }

@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ui.R;
+import com.tutorias.vista.R;
 
 import java.util.ArrayList;
 
@@ -36,7 +36,7 @@ public class myAdapatador extends RecyclerView.Adapter<PersonViewHolder>{
     public void onBindViewHolder(@NonNull PersonViewHolder holder, int position) {
         holder.nombre.setText(alumnos.get(position).getNombre()+" "+alumnos.get(position).getApellido().replace("+"," "));
         holder.carrera.setText("Carrera: "+alumnos.get(position).getCarrera()+", Semestre"+alumnos.get(position).getSemestre());
-        holder.personPhoto.setImageResource(R.drawable.agregar);
+        holder.personPhoto.setImageResource(R.drawable.usuario);
     }
 
     @Override

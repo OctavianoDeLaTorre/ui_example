@@ -1,13 +1,16 @@
-package com.example.ui;
+package com.tutorias.vista;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
+import com.tutorias.vista.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -34,13 +37,14 @@ public class BajasActivity extends AppCompatActivity {
 
     private String nc;
     private AnalizadorJSON json = new AnalizadorJSON();
-    private String url_servidor = "http://10.0.2.2/PruebasPHP/Sistema_ABCC_MSQL/";
+    private String url_servidor = "http://176.48.16.22/PruebasPHP/Sistema_ABCC_MSQL/";
+    InputMethodManager imm ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bajas);
-
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         configView();
     }
 
@@ -49,7 +53,7 @@ public class BajasActivity extends AppCompatActivity {
         rv.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
-
+        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         mostrarAlumnos("1","1");
 
@@ -61,7 +65,26 @@ public class BajasActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 nc = txtBNumControl.getText().toString();
-                mostrarAlumnos("num_control",nc);
+                if (!nc.replace(" ","").equals("")){
+                    mostrarAlumnos("numControl",nc);
+                    Snackbar.make(rv, "Alumno encontrado con exito!.", Snackbar.LENGTH_SHORT)
+                            .setAction("Ok", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                }
+                            })
+                            .show();
+                }  else
+                    Snackbar.make(rv, "Falta informació!.", Snackbar.LENGTH_SHORT)
+                            .setAction("Ok", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                }
+                            })
+                            .show();
+
 
             }
         });
@@ -69,34 +92,52 @@ public class BajasActivity extends AppCompatActivity {
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
+
                     nc = txtBNumControl.getText().toString();
-                    boolean resultado = new EliminarAlumno().execute(nc).get();
-                    if (resultado){
-                        Snackbar.make(rv, "Alumno eliminado con exito!.", Snackbar.LENGTH_SHORT)
-                                .setAction("Ok", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
+                    if (!nc.replace(" ","").equals("")){
+                        boolean resultado = false;
+                        try {
+                            resultado = new EliminarAlumno().execute(nc).get();
 
-                                    }
-                                })
-                                .show();
-                    }else{
-                        Snackbar.make(rv, "No fue posible eliminar al alumno eliminado!.", Snackbar.LENGTH_SHORT)
-                                .setAction("Ok", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                    }
-                                })
-                                .show();
-                    }
+                            if (resultado){
+                                Snackbar.make(rv, "Alumno eliminado con exito!.", Snackbar.LENGTH_SHORT)
+                                        .setAction("Ok", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
 
-                    mostrarAlumnos("1","1");
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                                            }
+                                        })
+                                        .show();
+                                txtBNumControl.setText("");
+                                txtBNumControl.requestFocus();
+                                imm.hideSoftInputFromWindow(txtBNumControl.getWindowToken(), 0);
+                            }else{
+                                Snackbar.make(rv, "No fue posible eliminar al alumno eliminado!.", Snackbar.LENGTH_SHORT)
+                                        .setAction("Ok", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                            }
+                                        })
+                                        .show();
+                            }
+
+                            mostrarAlumnos("1","1");
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                    } else
+                        Snackbar.make(rv, "Falta informació!.", Snackbar.LENGTH_SHORT)
+                        .setAction("Ok", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                            }
+                        })
+                        .show();
+
             }
         });
     }
@@ -144,7 +185,6 @@ public class BajasActivity extends AppCompatActivity {
                                 jesonArray.getJSONObject(i).getString("pa"),
                                 jesonArray.getJSONObject(i).getString("c"),
                                 jesonArray.getJSONObject(i).getString("s")
-
                         ));
                     }
                 }

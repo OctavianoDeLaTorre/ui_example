@@ -6,7 +6,7 @@
     android:padding="4dp">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cvBajas"
+        android:id="@+id/cvTutor"
         style="@style/Widget.MaterialComponents.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
             android:background="@color/colorAccent">
 
             <ImageView
-                android:id="@+id/person_photo"
+                android:id="@+id/person_photo_tutor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -32,11 +32,11 @@
                 app:srcCompat="@drawable/actualizar" />
 
             <TextView
-                android:id="@+id/nombreAlumno"
+                android:id="@+id/nombreTutor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/person_photo"
+                android:layout_toRightOf="@+id/person_photo_tutor"
                 android:paddingTop="5dp"
                 android:text="Nombre"
                 android:textColor="@color/design_default_color_on_secondary"
@@ -44,11 +44,11 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/carreraAlumno"
+                android:id="@+id/carreraTutor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/nombreAlumno"
-                android:layout_toRightOf="@+id/person_photo"
+                android:layout_below="@+id/nombreTutor"
+                android:layout_toRightOf="@+id/person_photo_tutor"
                 android:text="Apellido" />
 
         </RelativeLayout>

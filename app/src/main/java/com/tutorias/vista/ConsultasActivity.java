@@ -1,4 +1,4 @@
-package com.example.ui;
+package com.tutorias.vista;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
+import com.tutorias.vista.R;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -35,9 +36,9 @@ public class ConsultasActivity extends AppCompatActivity {
     RecyclerView rv;
 
     private AnalizadorJSON json = new AnalizadorJSON();
-    private String url_servidor = "http://10.0.2.2/PruebasPHP/Sistema_ABCC_MSQL/";
+    private String url_servidor = "http://176.48.16.22/PruebasPHP/Sistema_ABCC_MSQL/";
 
-    String campo = "num_control";
+    String campo = "numControl";
     String valor;
     private ArrayList<Alumno> alumnos;
 
@@ -66,7 +67,7 @@ public class ConsultasActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    campo = "primer_ap";
+                    campo = "primerAp";
                 }
             }
         });
@@ -74,7 +75,7 @@ public class ConsultasActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    campo = "nombre";
+                    campo = "Nombre";
                 }
             }
         });
@@ -82,7 +83,7 @@ public class ConsultasActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
-                    campo = "num_control";
+                    campo = "numControl";
                 }
             }
         });
@@ -105,30 +106,10 @@ public class ConsultasActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     public void mostrarAlumnos(String campo, String valor){
-        try {
-            alumnos = new BuscarAlumno().execute(campo, valor).get();
-            if (alumnos != null){
-                myAdapatador adaptador = new myAdapatador(alumnos);
-                rv.setAdapter(adaptador);
-            } else {
-                Snackbar.make(rv, "No se ha econtrado alumnos registrados!.", Snackbar.LENGTH_SHORT)
-                        .setAction("Ok", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-
-                            }
-                        })
-                        .show();
-            }
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        new BuscarAlumno().execute(campo, valor);
     }
 
     private class BuscarAlumno extends AsyncTask<String, String, ArrayList<Alumno>> {
@@ -156,12 +137,28 @@ public class ConsultasActivity extends AppCompatActivity {
                     }
                 }
 
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
             return lista;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Alumno> alumnos) {
+            if (alumnos != null){
+                myAdapatador adaptador = new myAdapatador(alumnos);
+                rv.setAdapter(adaptador);
+            } else {
+                Snackbar.make(rv, "No se ha econtrado alumnos registrados!.", Snackbar.LENGTH_SHORT)
+                        .setAction("Ok", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                            }
+                        })
+                        .show();
+            }
         }
     }
 }

@@ -1,7 +1,8 @@
-package com.example.ui
+package com.tutorias.vista
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.tutorias.vista.R
 
 class MainActivity : AppCompatActivity() {
 

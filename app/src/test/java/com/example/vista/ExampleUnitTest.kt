@@ -1,4 +1,4 @@
-package com.example.ui
+package com.example.vista
 
 import org.junit.Test
 

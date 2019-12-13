@@ -144,7 +144,6 @@ public class AnalizadorJSON {
             e.printStackTrace();
         }
 
-
         return jsonObject;
     }
 
