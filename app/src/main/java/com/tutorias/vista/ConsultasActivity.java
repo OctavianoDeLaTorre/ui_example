@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 
-import com.tutorias.vista.R;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
